@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121105010147) do
+ActiveRecord::Schema.define(:version => 20121218041440) do
 
   create_table "feedbacks", :force => true do |t|
     t.string   "content"
@@ -95,7 +95,7 @@ ActiveRecord::Schema.define(:version => 20121105010147) do
     t.string   "remember_token"
     t.boolean  "admin",           :default => false
     t.string   "image"
-    t.integer  "credit"
+    t.integer  "credit",          :default => 0
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
