@@ -1,0 +1,25 @@
+<% provide(:title, 'Join this Pool') %>
+<h1>Join this pool</h1>
+<h2>Your Name: <%= current_user.name %></h2>
+<h3>Credits in your account: <%= current_user.credit %></h3>
+
+<section>
+<div class="row">
+	<div class="span6 offset3">
+		<%= form_for([@game, @pool, @player]) do |f| %>
+
+			<%= f.label :team, "Team 1 or Team 2" %>
+			<%= f.select(:team, options_for_select([
+					['1', '1'], 
+					['2', '2']
+					])) %>
+	
+
+			<%= f.label :bet_amount, "Buy in" %>
+			<%= f.text_field :bet_amount %>
+
+			<%= f.submit "Join Pool", class: "btn btn-large btn-primary" %>
+		<% end %> 
+	</div>
+</div>
+</section>

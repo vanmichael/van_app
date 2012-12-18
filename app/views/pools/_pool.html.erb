@@ -1,0 +1,21 @@
+<li>
+  <table class="table table-bordered">
+    <tr>
+      <th rowspan=2; style="width: 50px;"> Pool Icon </th>
+      <th>Pool Type:</th>
+      <th style="width: 100px;">Maximum Players allowed in this Pool</th>
+      <th> Total Players currently in Pool </th>
+      <th> Pool Buy in </th>
+      <th>Created At:</th>
+      <th>Created By:</th>
+    </tr>
+    <tr>
+      <td> <%= link_to pool.name, game_pool_path(@game, pool) %> </td>
+      <td><%= pool.max_players %></td>
+      <td><%= pool.players_count %></td>
+      <td> <%= pool.user_credits %> </td>
+      <td>Posted <%= time_ago_in_words(pool.created_at) %> ago</td>
+      <td><%= pool.user.name %></td>
+  </tr>
+  </table>
+</li>

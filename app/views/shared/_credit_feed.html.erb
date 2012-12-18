@@ -1,0 +1,7 @@
+<% if @credit_items.any? %>
+	<ol class="microposts">
+		<%= render partial: 'shared/credit_item', collection: @credit_items %>
+	</ol>
+	<%= will_paginate @credit_items %>
+	
+<% end %>

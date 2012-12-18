@@ -1,0 +1,34 @@
+<% provide(:title, 'Edit this game') %>
+<h1>Edit this game</h1>
+
+<div class="row">
+		<div class="span6 offset3">
+			<%= form_for(@game) do |f| %>
+
+				<%= f.label :name, "Name of Team 1 vs. Name of Team 2" %>
+				<%= f.text_field :name %>
+
+				<%= f.label :description, "Type of Sport" %>
+				<%= f.select(:description, options_for_select([
+										['Baseball', 'Baseball'],
+										['Basketball', 'Basketball'],
+										['Football', 'Football'],
+										['Soccer', 'Soccer'],
+										['Tennis', 'Tennis']
+										])) %>
+				<%= f.label :date, "Date of Event" %>
+				<%= f.date_select :date, :order => [:day, :month, :year] %>
+
+				<%= f.label :icon_id, "Choose a sports icon" %>
+				<%= f.text_field :icon_id %>
+				<div>
+						<% @icons.each do |i| %>
+						<%= show_images i, :thumb %>
+						<% end %>
+				</div>
+
+				<%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
+			<% end %>
+		</div>
+</div>
+	

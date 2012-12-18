@@ -1,0 +1,30 @@
+<% provide(:title, 'Create new pool!') %>
+<h1>Create a new pool</h1>
+
+<div class="row">
+	<div class="span6 offset3">
+		<%= form_for([@game, @pool]) do |f| %>
+
+			<%= f.hidden_field :game_id, :value=>params[:game_id] %>
+
+				<%= f.label :game_type, "Choose a Game Type" %>
+				<%= f.select(:game_type, options_for_select([
+							['Team one vs Team two', '1'],
+							['Closest Score', '2'],
+							['Total Game Score', '3']
+						])) %>
+
+			<%= f.label :name, "What kind of bet" %>
+			<%= f.text_field :name %>
+
+			<%= f.label :user_credits, "Drops needed to join Bucket (Buy In)" %>
+			<%= f.text_field :user_credits %>
+
+			<%= f.label :max_players, "Total Amount of friends allowed in the pool" %>
+			<%= f.text_field :max_players %>
+
+			<%= f.submit "Create new pool", class: "btn btn-large btn-primary" %>
+
+		<% end %>
+	</div>
+</div>

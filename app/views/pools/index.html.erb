@@ -1,0 +1,10 @@
+<% provide(:title, 'All Pools') %>
+<h1>All Pools</h1>
+
+<%= will_paginate %>
+
+<ul class="users"> <!-- this will change when you figure out css structure -->
+	<%= render @pools %> 
+</ul>
+
+<%= will_paginate %>

@@ -1,0 +1,16 @@
+<% provide(:title, 'All Games') %>
+<h1>All Games</h1>
+
+<div class="center">
+	<%= link_to "Create a New Game", 'games/new', class: "btn btn-large btn-primary" %>
+</div>
+
+<section>
+<%= will_paginate %>
+
+<ul class="users"> <!-- this will change when you figure out css structure -->
+	<%= render @games %> 
+</ul>
+
+<%= will_paginate %>
+</section>

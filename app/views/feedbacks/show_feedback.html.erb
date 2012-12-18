@@ -1,0 +1,24 @@
+<% provide(:title, 'Here is your Feedback') %>
+<h1>Here is your Feedback</h1>
+
+ <table class = "table">
+  <tr>
+    <th>User</th>
+    <th>Feedback</th>
+    <th>Email</th>
+    <th></th>
+    <th></th>
+  </tr>
+ 
+<% @feedbacks.each do |f| %>
+  <tr>
+    <td><%= f.user.name %></td>
+    <td><%= f.content %></td>
+    <td><%= f.user.email %></td>
+    <td></td>
+    <td></td>
+  </tr>x
+<% end %>
+</table>
+ 
+

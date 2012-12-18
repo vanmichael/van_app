@@ -1,0 +1,22 @@
+<% provide(:title, 'Add and a new Icon') %>
+
+<h1> Add a New Icon </h1>
+
+<div class="add-icon">
+		<%= form_for(@icon) do |i| %>
+			<%= i.label :name %>
+			<%= i.text_field :name %>
+			<%= i.label :sport_type, "Sport" %>
+			<%= i.select(:sport_type, options_for_select([
+										['Baseball', 'Baseball'],
+										['Basketball', 'Basketball'],
+										['Football', 'Football'],
+										['Soccer', 'Soccer'],
+										['Tennis', 'Tennis']
+										])) %>
+
+			<%= i.file_field :image %>
+
+			<%= i.submit "upload new icon", class: "btn btn-large btn-primary" %>
+		<% end %>
+</div>

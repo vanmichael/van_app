@@ -1,0 +1,29 @@
+<% provide(:title, @game.name) %>
+<h1> <%= @game.name %> </h1>
+<div class="row">
+	<aside class="span12">
+		<section>
+			<div>
+				<%= show_icon_for @game.icon_id, :thumb   %>
+				<%= @game.name %>
+			</div>
+			<h2> Date of Event:  <%= @game.date %></h2>
+		</section>
+		<section>
+			<div class="center">
+			<%= link_to "Create a New Pool", new_game_pool_path(@game), class: "btn btn-large btn-primary" %>
+			</div>
+		</section>
+		<section>
+			<div class="span10">
+				<h3>Pools (<%= @game.pools.count %>)</h3>
+				<% if @game.pools.any? %>
+					<ol>
+					<%= render @game.pools %>
+					</ol>
+				<% end %>
+			</div>
+		</section>
+		</aside>
+	
+</div>

@@ -1,0 +1,60 @@
+<% provide(:title, @pool.name) %>
+<h1> <%= @pool.name %> </h1>
+<div class="row">
+	<aside class="span12">
+		<section>
+			<div>
+				<h4> Game Prediction: <%= @pool.name %> ! </h4>
+			</div>
+		</section>
+			<table class="table">
+				<tr>
+					<th style="width: 120px;"> Players in Pool: </th>
+					<th> <%= @pool.players_count %> / <%= @pool.max_players %></th>
+					<th style="width: 90px;"> Pool Buy in: </th>
+					<th> <%= @pool.user_credits %></th>
+					<th style="width: 220px"> Credits contributed to this pool: </th>
+					<th> <%= @pool.credit_counter %> / <%= @pool.credit_limit %> </th>
+				</tr>
+			</table>
+
+		<section>
+			<div class="user_avatars">
+				<% if @pool.game_type == 2 %>
+				<% @players.each do |player| %>
+						<%= profile_pic_for player.user, :player %>
+						<%= player.score %>
+				<% end %>
+				<% end %>
+			</div>
+
+			<% if @pool.game_type == 1 %>
+			<div class="user_avatars">
+				<h3>Team One (<%= @pool.name %>)</h3>
+				<% @players.each do |player| %>
+					<% if player.team == 1 %>
+						<%= profile_pic_for player.user, :player %>
+					<% end %>
+				<% end %>
+			</div>
+			<div class="user_avatars">
+				<h3>Team Two</h3>
+				<% @players.each do |player| %>
+					<% if player.team == 2 %>
+						<%= profile_pic_for player.user, :player %>
+					<% end %>
+				<% end %>
+			</div>
+			<% end %>
+		</section>
+		<section>
+			<% if @pool.game_type == 1 %>
+				<%= render 'shared/join_form' %>
+			<% end %>
+
+			<% if @pool.game_type == 2 %>
+				<%= render 'shared/join_score_form' %>
+			<% end %>
+		</section>
+	</aside>
+</div>

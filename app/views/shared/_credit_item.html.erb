@@ -1,0 +1,24 @@
+<li id="<%= credit_item.id %>">
+<table>
+	<tr>
+		<th rowspan="3">
+			<%= show_icon_for credit_item.pool.game.icon_id, :micro %>
+		</th>
+		<th>
+			<span class="content"> <strong>Pool:</strong> <%= link_to credit_item.pool.name, game_pool_path(credit_item.pool.game, credit_item.pool) %></span>
+		</th>
+	</tr>
+	<tr>
+		<td>
+			<span class="content"> Buy in: <%= credit_item.bet_amount %></span>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span class="timestamp">
+			Posted <%= time_ago_in_words(credit_item.created_at) %> ago.
+			</span>
+		</td>
+	</tr>
+</table>
+</li>

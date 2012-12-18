@@ -1,0 +1,21 @@
+<li>
+  <table class="table table-bordered">
+    <tr>
+      <th rowspan="2" style="width: 50px;"> <%= show_icon_for game.icon_id, :thumb %> </th>
+      <th>Game:</th>
+      <th style="width: 100px;">Type</th>
+      <th>Date of Event</th>
+      <th>Created At:</th>
+      <th>Created By:</th>
+      <th rowspan="2"=> <%= link_to "Make Changes", edit_game_path(game) %></th>
+    </tr>
+    <tr>
+      <td><%= link_to game.name, game %></td>
+      <td><%= game.description %></td>
+      <td><%= game.date %></td>
+      <td>Posted <%= time_ago_in_words(game.created_at) %> ago</td>
+      <td><%= game.user.name %></td>
+  </tr>
+  </table>
+</li>
+
