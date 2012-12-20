@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessible :name, :email, :password, :password_confirmation, :image, :credit
+  attr_accessible :name, :first_name, :last_name, :email, :password, :password_confirmation, :image, :credit
   has_secure_password
 
   has_many :microposts, dependent: :destroy
@@ -15,13 +15,18 @@ class User < ActiveRecord::Base
   has_many :pools
   has_many :players
 
+  has_many :friendships
+  has_many :friends, through: :friendships
+
   require 'carrierwave/orm/activerecord'
   mount_uploader :image, ImageUploader
 
   before_save { |user| user.email = user.email.downcase }
   before_save :create_remember_token
 
-  validates :name,  presence: true, length: { maximum: 50 }
+  validates :first_name,  presence: true, length: { maximum: 50 }
+  validates :last_name,  presence: true, length: { maximum: 50 }
+
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX },
   					uniqueness: { case_sensitive: false }

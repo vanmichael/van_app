@@ -1,12 +1,15 @@
-<% provide(:title, @user.name) %>
+<% provide(:title, full_name(@user)) %>
 
 <div class="row">
 	<aside class="span4">
 		<section>
 			<h1>
 				<%= profile_pic_for @user, :thumb   %>
-				<%= @user.name %>
+				<%= full_name(@user) %>
 			</h1>
+			<h4>
+				<%= render 'shared/friend_form' %>
+			</h4>
 		</section>
 		<section>
 			<%= render 'shared/stats' %>

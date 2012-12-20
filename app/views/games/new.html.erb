@@ -2,7 +2,7 @@
 <h1>Create new game</h1>
 
 <div class="row">
-		<div class="span6 offset3">
+		<div class="span4 offset4">
 			<%= form_for(@game) do |f| %>
 
 				<%= f.label :name, "Name of Team 1 vs. Name of Team 2" %>
@@ -20,17 +20,21 @@
 				<%= f.date_select :date, :order => [:month, :day, :year] %>
 
 				<%= f.label :icon_id, "Choose a sports icon" %>
+			
 				<%= f.text_field :icon_id %>
-				
-				<div>
-					<% @icons.each do |icon| %>
-					<%= show_image icon, :thumb %>
-					<% end %>
-				</div>
-				<div class="center">
+		</div>
+</div>
+<div class="row">
+		<div class="span7 offset3">
+				<% @icons.each do |icon| %>
+				<%= show_image icon, :thumb %>
+				<% end %>
+		</div>
+</div>
+		<div class="center">
 				<%= f.submit "Post New Game", class: "btn btn-large btn-primary" %>
-				</div>
-			<% end %>
+				<% end %>
+		</div>
 		</div>
 </div>
 	
