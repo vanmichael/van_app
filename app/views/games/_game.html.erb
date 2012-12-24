@@ -14,7 +14,7 @@
       <td><%= game.description %></td>
       <td><%= game.date %></td>
       <td>Posted <%= time_ago_in_words(game.created_at) %> ago</td>
-      <td><%= game.user.name %></td>
+      <td><%= full_name(game.user) %></td>
   </tr>
   </table>
 </li>

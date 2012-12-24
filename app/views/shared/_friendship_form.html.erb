@@ -1,0 +1,14 @@
+<% if signed_in? and @user != current_user %>
+
+	<ul>
+	<li><%= friendship_status(current_user, @user) %>
+		<% unless Friendship.exists?(current_user, @user) %>
+		  <br />
+		  <%= link_to "Request friendship with #{full_name(@user)}", friendships_path(:user => @user.screen_name), :method => :post, :confirm => "you sure?" %>
+		  <%= @user.screen_name %>
+		<% end %>
+	</li>
+    </ul>
+
+<% end %>
+

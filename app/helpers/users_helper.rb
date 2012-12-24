@@ -24,10 +24,4 @@ module UsersHelper
 		image_tag user.image_url(size_version_key).to_s
 		end
 	end
-
-	def friend_requested?(user)
-		@friend = Friendship.find_by_friend_id(current_user.id)
-		@friended = @friend.friended_id
-        user.id == @friended
-	end
 end

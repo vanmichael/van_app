@@ -1,5 +1,15 @@
 SampleApp::Application.routes.draw do
 
+  get "spec/index"
+
+  get "spec/edit"
+
+  get "profile/index"
+
+  get "profile/show"
+
+  resources :friendships
+
   get "feed_back/send"
 
   resources :users do 
@@ -14,8 +24,6 @@ SampleApp::Application.routes.draw do
     end
   end
 
-
-  resources :friendships
   resources :sessions, only: [:new, :create, :destroy]
   resources :microposts, only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]
@@ -27,6 +35,8 @@ SampleApp::Application.routes.draw do
   #new, create(post), show, destroy, edit, update(put), index
 
   root to: 'static_pages#home'
+
+  match "/profile/:screen_name", to: 'profile#show'
 
   match '/signup',  to: 'users#new'
   match '/signin',  to: 'sessions#new'

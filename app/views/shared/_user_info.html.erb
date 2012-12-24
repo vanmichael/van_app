@@ -2,6 +2,6 @@
 	<%= profile_pic_for current_user, :thumb %>
 </a>
 
-<h1><%= current_user.name %></h1>
-<span><%= link_to "view my profile", current_user %></span>
+<h1><%= full_name(current_user) %></h1>
+<span><%= link_to "view my profile", profile_for(current_user) %></span>
 <span><%= pluralize(current_user.microposts.count, "micropost") %></span>

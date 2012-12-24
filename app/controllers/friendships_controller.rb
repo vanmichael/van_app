@@ -1,28 +1,19 @@
 class FriendshipsController < ApplicationController
+before_filter :setup_friends
+  #send a friend request.
+  #We'd rather call this "request", but that's not allowed by rails
 
-	before_filter :signed_in_user
+  def create
+    Friendship.request(@user, @friend)
+    flash[:notice] = "Friend request sent."
+    redirect_to profile_for(@friend)
+  end
 
-	def new
-		@friend = Friendship.new(params[:friendship])
-	end
+  private
 
-	def create
-		@user = User.find_by_id(params[:id])
-		@friend = Friendship.new(params[:friendship])
-		if @friend.save
-			flash[:success] = "Friend Request Sent"
-			redirect_to root_path
-		else
-			flash[:notice] = "Sorry Friend Not Created"
-			redirect_to root_path
-		end
-	end
-
-	def update
-
-	end
-
-	def destroy
-	
-	end
+  def setup_friends
+    @user = User.find_by_id(current_user)
+    @friend = User.find_by_screen_name(params[:user])
+  end
+    
 end

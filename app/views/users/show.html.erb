@@ -7,15 +7,13 @@
 				<%= profile_pic_for @user, :thumb   %>
 				<%= full_name(@user) %>
 			</h1>
-			<h4>
-				<%= render 'shared/friend_form' %>
-			</h4>
+			<h4><%= link_to "view my profile", profile_for(@user) %></h4>
 		</section>
 		<section>
 			<%= render 'shared/stats' %>
 		</section>
 	</aside>
-	<div class="span8">
+	<div class="span4">
 		<%= render 'follow_form' if signed_in? %>
 		<% if @user.microposts.any? %>
 			<h3>Microposts (<%= @user.microposts.count %>)</h3>
@@ -26,4 +24,8 @@
 		<%= will_paginate @microposts %>
 		<% end %>
 	</div>
+    <aside class="span4">
+		<%= render 'shared/friends' %>
+	</aside>
 </div>
+

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121219210247) do
+ActiveRecord::Schema.define(:version => 20121223185544) do
 
   create_table "feedbacks", :force => true do |t|
     t.string   "content"
@@ -21,11 +21,12 @@ ActiveRecord::Schema.define(:version => 20121219210247) do
   end
 
   create_table "friendships", :force => true do |t|
+    t.integer  "user_id"
     t.integer  "friend_id"
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
-    t.integer  "friended_id"
-    t.boolean  "friends",     :default => false
+    t.string   "status"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.datetime "accepted_at"
   end
 
   create_table "games", :force => true do |t|
@@ -94,8 +95,20 @@ ActiveRecord::Schema.define(:version => 20121219210247) do
   add_index "relationships", ["follower_id", "followed_id"], :name => "index_relationships_on_follower_id_and_followed_id", :unique => true
   add_index "relationships", ["follower_id"], :name => "index_relationships_on_follower_id"
 
+  create_table "specs", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "gender"
+    t.date     "birthdate"
+    t.string   "city"
+    t.string   "organization"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
   create_table "users", :force => true do |t|
-    t.string   "name"
+    t.string   "screen_name"
     t.string   "email"
     t.datetime "created_at",                         :null => false
     t.datetime "updated_at",                         :null => false
