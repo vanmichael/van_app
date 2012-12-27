@@ -1,1 +1,12 @@
-<h4>Friend</h4>
+<% if signed_in? and @user != current_user %>
+
+<ul>
+	<li><%= friendship_status(current_user, @user) %>
+		<% unless Friendship.exists?(current_user, @user) %>
+		<br />
+		<%= button_to "Add Friend", friendships_path(:user => @user.screen_name), :method => :post, :confirm => "Send friend request to #{full_name(@user)}?" %>
+		<% end %>
+   </li>
+</ul>
+
+<% end %>

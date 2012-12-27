@@ -1,31 +1,43 @@
 <% provide(:title, full_name(@user)) %>
 
-<div class="row">
+
+<div class="row"> <%# First Row %>
 	<aside class="span4">
 		<section>
 			<h1>
 				<%= profile_pic_for @user, :thumb   %>
 				<%= full_name(@user) %>
 			</h1>
-			<h4><%= link_to "view my profile", profile_for(@user) %></h4>
+			<h4><%= link_to "About Me", about_for(@user) %></h4>
 		</section>
-		<section>
-			<%= render 'shared/stats' %>
-		</section>
-	</aside>
-	<div class="span4">
-		<%= render 'follow_form' if signed_in? %>
-		<% if @user.microposts.any? %>
-			<h3>Microposts (<%= @user.microposts.count %>)</h3>
-			<ol class="microposts">
-			<%= render @microposts %>
-			</ol>
 
-		<%= will_paginate @microposts %>
-		<% end %>
-	</div>
+		<div> <%# Show follow %>
+		<%= render 'follow_form' if signed_in? %>
+		<%= render 'shared/stats' %>
+		</div>
+			<br>
+		<div style="width:60%"> <%# show Sticky Notes %>
+			<% if @user.microposts.any? %>
+				<h3>Sticky Notes (<%= @user.microposts.count %>)</h3>
+					<ol class="microposts">
+						<%= render @microposts %>
+					</ol>
+						<%= will_paginate @microposts %>
+			<% end %>
+		</div>
+	</aside>
+
+	<%# This is for the Friend Button %>
+	<aside class="span4">
+		<h2>
+			<%= render 'shared/friend_form' %>
+		</h2>
+	</aside>
+
+	<%# This is for the Friend's List%>
     <aside class="span4">
+    	<div>
 		<%= render 'shared/friends' %>
+	    </div>
 	</aside>
 </div>
-

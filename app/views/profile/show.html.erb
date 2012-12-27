@@ -1,16 +1,17 @@
 <% provide(:title, full_name(@user)) %>
 <div class="row">
+	<h1><%= full_name(@user) %>'s Profile Page</h1>
 	<aside class="span4">
-		<h1>Profile</h1>
-			<h1>
+			<div>
 				<%= profile_pic_for @user, :thumb   %>
-				<%= full_name(@user) %>
-			</h1>
+			</div>
 			<h4>
-				<%= render 'shared/friendship_form' %>
+				<%= full_name(@user) %>
 			</h4>
 	</aside>
 	 <aside class="span4">
 		<%= render 'shared/friends' %>
 	</aside>
 </div>
+
+

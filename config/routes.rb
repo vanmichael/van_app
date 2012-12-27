@@ -8,7 +8,15 @@ SampleApp::Application.routes.draw do
 
   get "profile/show"
 
-  resources :friendships
+  resources :friendships do
+    member do 
+      put :accept
+      delete :decline
+      delete :cancel
+      delete :delete
+    end
+  end 
+  
 
   get "feed_back/send"
 

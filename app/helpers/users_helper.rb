@@ -21,7 +21,7 @@ module UsersHelper
 		if user.image.blank?
 		image_tag "rails.png"
 		else
-		image_tag user.image_url(size_version_key).to_s
+		image_tag user.image_url(size_version_key).to_s, :id => 'profile'
 		end
 	end
 end

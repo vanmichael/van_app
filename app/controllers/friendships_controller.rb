@@ -9,6 +9,46 @@ before_filter :setup_friends
     redirect_to profile_for(@friend)
   end
 
+  def accept
+    if @user.requested_friends.include?(@friend)
+      Friendship.accept(@user, @friend)
+      flash[:notice] = "Friendship with #{full_name(@friend)} accepted!"
+    else
+      flash[:notice] = "No friendship request from #{full_name(@friend)}."
+    end
+    redirect_to current_user
+  end
+
+  def decline
+    if @user.requested_friends.include?(@friend)
+      Friendship.breakup(@user, @friend)
+      flash[:notice] = "Friendship with #{full_name(@friend)} declined"
+    else
+      flash[:notice] = "No friendship request from #{full_name(@friend)}."
+    end
+    redirect_to current_user
+  end
+
+  def cancel
+    if @user.pending_friends.include?(@friend)
+      Friendship.breakup(@user, @friend)
+      flash[:notice] = "Friendship request canceled."
+    else
+      flash[:notice] = "No request for friendship with #{full_name(@friend)}."
+    end
+    redirect_to current_user
+  end
+
+  def delete
+    if @user.friends.include?(@friend)
+      Friendship.breakup(@user, @friend)
+      flash[:notice] = "Friendship Terminated."
+    else
+      flash[:notice] = "Not a friend with #{full_name(@friend)}."
+    end
+    redirect_to current_user
+  end
+
   private
 
   def setup_friends

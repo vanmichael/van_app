@@ -1,8 +1,21 @@
 <%= form_for(@micropost) do |f| %>
 	<%= render 'shared/error_messages', object: @micropost %>
-	<div class="field">
-		<%= f.text_area :content, placeholder: "Compose new micropost..." %>
+	<div class="span4">
+		<table>
+			<tr>
+				<td colspan="2">
+				<%= pluralize(current_user.microposts.count, "Your Sticky Notes") %>
+				</td>
+			</tr>
+			<tr>
+				<td>
+		<%= f.text_area :content, placeholder: "Whats on your mind...", :rows => 2 %>
+				</td>
+				<td>
+		<%= f.submit "Post", class: "btn btn-primary" %>
+				</td>
+			</tr>
+		</table>
 	</div>
-	<%= f.submit "Post", class: "btn btn-large btn-primary" %>
 <% end %>
 	

@@ -15,7 +15,7 @@
       <td><%= pool.players_count %></td>
       <td> <%= pool.user_credits %> </td>
       <td>Posted <%= time_ago_in_words(pool.created_at) %> ago</td>
-      <td><%= pool.user.name %></td>
+      <td><%= full_name(pool.user) %></td>
   </tr>
   </table>
 </li>

@@ -1,7 +1,11 @@
 module ProfileHelper
 #Return the user's profile URL.
-def profile_for(user)
+def about_for(user)
 	url_for(:controller => 'profile', :action => 'show', :screen_name => user.screen_name)
+end
+
+def profile_for(user)
+	url_for(@user)
 end
 
 #Return true if hiding the edit links for spec, etc.

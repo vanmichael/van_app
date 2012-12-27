@@ -1,0 +1,61 @@
+<table>
+	<tr>
+		<th colspan="3" align="left">
+
+			<%= pluralize(@user.friends.count, "Friend") %>
+		</th>
+	</tr>
+	<% @user.friends.each do |friend| %>
+		<tr>
+			<td width='50'>
+				<%= link_to profile_pic_for(friend, :micro), profile_for(friend) %>
+			</td>
+			<td><%= link_to full_name(friend), profile_for(friend) %>
+			</td>
+			<td>
+				<% unless hide_edit_links? %>
+					<%= link_to "Delete", friendships_path(:user => friend.screen_name), :method => :delete, :confirm => "you sure?" %>
+				<% end %>
+			</td>
+		</tr>
+		<% end %>
+
+		<% unless @user.requested_friends.empty? or hide_edit_links? %>
+			<tr>
+				<th colspan="3" align="left">
+					<%= pluralize(@user.requested_friends.count, "requested friend") %>
+				</th>
+			</tr>
+			<%= @user.requested_friends.each do |requester| %>
+			<tr>
+				<td><%= link_to "Accept", friendships_path(:user => requester.screen_name), :action => "accept", :confirm => "you sure?" %>
+
+					<%= link_to "Decline", friendships_path(:user =>requester.screen_name), :action => "decline", :confirm => "you sure?" %>
+				</td>
+			</tr>
+		<% end %>
+	<% end %>
+	<% unless @user.pending_friends.empty? or hide_edit_links? %>
+		<tr>
+			<th colspan="3" align="left">
+				<%= pluralize(@user.pending_friends.count, "pending friend") %>
+			</th>
+		</tr>
+		<% @user.pending_friends.each do |pending_friend| %>
+		<tr>
+			<td><%= link_to profile_pic_for(pending_friend, :micro), profile_for(pending_friend) %></td>
+			<td><%= link_to full_name(pending_friend), profile_for(pending_friend) %></td>
+			<td><%= link_to "Cancel request", friendships_path(:user => pending_friend.screen_name), :action => "cancel", :confirm => "you sure?" %></td>
+		</tr>
+		<% end %>
+	<% end %>
+</table>
+
+
+
+
+
+
+
+
+
