@@ -1,30 +1,113 @@
-set :application, "gameb00k"
-set :repository,  "git@github.com:vanmichael/van_app.git"
-default_run_options[:pty] = true
+###### START DEPLOY.RB ######
 
-set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
-# Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
+# Your cPanel/SSH login name
 
-role :web, "gameb00k.com"                          # Your HTTP server, Apache/etc
-role :app, "gameb00k.com"                          # This may be the same as your `Web` server
-role :db,  "gameb00k.com", :primary => true # This is where Rails migrations will run
-role :db,  "gameb00k.com"
+set :user , "gamebkco"
 
-set :user, "gamebkco"
+
+
+# The domain name of the server to deploy to, this can be your domain or the domain of the server.
+
+set :server_name, "gameb00k.com"
+
+
+
+# Your svn / git login name
+
+set :scm_username , "vanmichael"
+
+set :scm_password, Proc.new { CLI.password_prompt "SVN Password: "}
+
+
+
+# Your repository type, by default we use subversion. 
+
+set :scm, :subversion
+
+
+
+# If you are using git, uncomment the following line and comment out the line above.
+
+#set :scm, :git
+
+
+
+# The name of your application, this will also be the folder were your application 
+
+# will be deployed to
+
+set :application, "van_app"
+
+
+
+# the url for your repository
+
+set :repository,  "https://github.com/vanmichael/van_app.git"
+
+
+
+
+
+###### There is no need to edit anything below this line ######
+
 set :deploy_to, "/home/#{user}/#{application}"
+
 set :use_sudo, false
 
-# if you want to clean up old releases on each deploy uncomment this:
-# after "deploy:restart", "deploy:cleanup"
+set :group_writable, false
 
-# if you're still using the script/reaper helper you will need
-# these http://github.com/rails/irs_process_scripts
+default_run_options[:pty] = true 
 
-# If you are using Passenger mod_rails uncomment this:
-# namespace :deploy do
-#   task :start do ; end
-#   task :stop do ; end
-#   task :restart, :roles => :app, :except => { :no_release => true } do
-#     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
-#   end
-# end
+
+
+role :app, server_name
+
+role :web, server_name
+
+role :db,  server_name, :primary => true
+
+
+
+# set the proper permission of the public folder
+
+task :after_update_code, :roles => [:web, :db, :app] do
+
+  run "chmod 755 #{release_path}/public"
+
+end
+
+
+
+namespace :deploy do
+
+
+
+  desc "restart passenger"
+
+  task :restart do
+
+    passenger::restart
+
+  end
+
+   
+
+end
+
+
+
+namespace :passenger do
+
+  desc "Restart dispatchers"
+
+  task :restart do
+
+    run "touch #{current_path}/tmp/restart.txt"
+
+  end
+
+end
+
+
+
+###### END DEPLOY.RB ######
