@@ -22,7 +22,7 @@ production:
   adapter: mysql
   database: gamebkco_gamebook
   username: gamebkco_van
-  password: [password]
+  password: arcobaleno
   host: localhost
 
 cucumber:
