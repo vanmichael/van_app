@@ -10,6 +10,7 @@ gem 'bootstrap-will_paginate', '0.0.6'
 gem 'jquery-rails', '2.0.2'
 gem 'carrierwave'
 gem 'rmagick'
+gem "capistrano", "~> 2.13.5"
 
 group :development, :test do
   gem 'sqlite3', '1.3.5'
@@ -38,5 +39,6 @@ group :test do
 end
 
 group :production do
-  gem 'pg', '0.12.2'
+  gem "mysql", "~> 2.9.0"
+  gem "passenger", "~> 3.0.18"
 end
