@@ -22,13 +22,13 @@ set :scm_password, Proc.new { CLI.password_prompt "SVN Password: "}
 
 # Your repository type, by default we use subversion. 
 
-set :scm, :subversion
+#set :scm, :subversion
 
 
 
 # If you are using git, uncomment the following line and comment out the line above.
 
-#set :scm, :git
+set :scm, :git
 
 
 
